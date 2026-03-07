@@ -17,6 +17,7 @@ struct PacketInfo {
     std::chrono::system_clock::time_point timestamp;
     bool isAnomaly;
     std::string anomalyReason;
+    std::string dnsQuery;
     
     PacketInfo() : sourcePort(0), destPort(0), packetSize(0), isAnomaly(false) {
         timestamp = std::chrono::system_clock::now();

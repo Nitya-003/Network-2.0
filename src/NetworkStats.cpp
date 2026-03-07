@@ -107,6 +107,12 @@ void NetworkStats::printLiveTable(const PacketInfo* recentPackets, size_t count)
         
         if (packet.isAnomaly) {
             std::cout << std::setw(30) << ("ANOMALY: " + packet.anomalyReason);
+        } else if (!packet.dnsQuery.empty()) {
+            std::string notes = "DNS: " + packet.dnsQuery;
+            if (notes.length() > 29) {
+                notes = notes.substr(0, 26) + "...";
+            }
+            std::cout << std::setw(30) << notes;
         } else {
             std::cout << std::setw(30) << "";
         }

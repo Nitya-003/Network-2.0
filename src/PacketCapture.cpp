@@ -228,6 +228,42 @@ PacketInfo PacketCapture::parsePacket(
 
         info.sourcePort = ntohs(ports->source);
         info.destPort   = ntohs(ports->dest);
+        
+        if (ip_header->ip_p == IPPROTO_UDP && (info.sourcePort == 53 || info.destPort == 53)) {
+            const u_char* payload = transport_header + 8;
+            int payload_offset = static_cast<int>(payload - packet);
+            
+            if (pkthdr->caplen >= payload_offset + 12) {
+                const u_char* dns_data = payload + 12;
+                int dns_max_len = pkthdr->caplen - (payload_offset + 12);
+                
+                std::string domain = "";
+                int i = 0;
+                
+                while (i < dns_max_len) {
+                    int len = dns_data[i];
+                    
+                    if (len == 0) break;
+                    
+                    if ((len & 0xC0) == 0xC0) {
+                        break;
+                    }
+                    
+                    if (i + 1 + len <= dns_max_len) {
+                        if (!domain.empty()) domain += ".";
+                        for (int j = 0; j < len; j++) {
+                            if (dns_data[i + 1 + j] >= 32 && dns_data[i + 1 + j] <= 126) {
+                                domain += dns_data[i + 1 + j];
+                            }
+                        }
+                        i += len + 1;
+                    } else {
+                        break;
+                    }
+                }
+                info.dnsQuery = domain;
+            }
+        }
     }
 
     return info;
