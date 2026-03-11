@@ -24,7 +24,7 @@ private:
     };
     
     struct ConnectionTracker {
-        int failedAttempts;
+        int failedAttempts = 0;
         std::chrono::system_clock::time_point firstFailTime;
         static const int FAILED_THRESHOLD = 20;
         static const int FAILED_WINDOW_SECONDS = 60;
