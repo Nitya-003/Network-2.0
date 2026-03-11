@@ -28,7 +28,7 @@ private:
 
     // ===== RING BUFFER =====
     static const int RING_SIZE = 2048;   // bigger buffer for high speed
-    const u_char* ringBuffer[RING_SIZE];
+    // const u_char* ringBuffer[RING_SIZE]; Naming conflict. (see 7 line below)
 
     struct QueuedPacket {
         struct pcap_pkthdr header;
