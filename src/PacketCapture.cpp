@@ -176,7 +176,7 @@ void PacketCapture::processRingBuffer() {
 
 /* ---------- Mostly same parsing logic ---------- */
 PacketInfo PacketCapture::parsePacket(
-    const struct pcap_pkthdr*,
+    const struct pcap_pkthdr* pkthdr,
     const u_char* packet) {
 
     PacketInfo info;
