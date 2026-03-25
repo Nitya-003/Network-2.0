@@ -159,9 +159,16 @@ The application uses a modular design with these components:
 - Network interface must support promiscuous mode
 - Performance depends on network traffic volume and system capabilities
 
+## Contributing & Community
+
+We welcome contributions from the community! To keep our project healthy and inclusive, please refer to the following documents:
+* **[Contributing Guidelines](CONTRIBUTING.md)**: Learn how to set up your dev environment, our coding standards, and the process for submitting Pull Requests.
+* **[Code of Conduct](CODE_OF_CONDUCT.md)**: Our standards for maintaining a respectful and welcoming environment.
+* **[Security Policy](SECURITY.md)**: Guidelines on how to report security vulnerabilities responsibly.
+
 ## License
 
-This project is provided as-is for educational and professional use.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ## Security Notice
 
